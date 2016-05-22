@@ -1,0 +1,33 @@
+{
+  "name": "instafap",
+  "version": "0.1.0",
+  "description": "Just share your photos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sharmaz/instafap.git"
+  },
+  "keywords": [
+    "photos",
+    "images",
+    "share"
+  ],
+  "author": "Ivan Robles",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sharmaz/instafap/issues"
+  },
+  "homepage": "https://github.com/Sharmaz/instafap#readme",
+  "dependencies": {
+    "browserify": "^13.0.1",
+    "express": "^4.13.4",
+    "materialize-css": "^0.97.6"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.1"
+  }
+}
