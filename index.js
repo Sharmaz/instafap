@@ -6,8 +6,10 @@ const port = process.env.PORT || 3000
 
 var server
 
+app.set('view engine', 'pug')
+
 app.get('/', function(req, res) {
-  res.send('Hola Mundo')
+  res.render('index')
 })
 
 server = app.listen(port, function (err) {
