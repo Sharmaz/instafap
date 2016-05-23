@@ -14,6 +14,14 @@ app.get('/', function(req, res) {
   res.render('index')
 })
 
+app.get('/signup', function(req, res) {
+  res.render('index')
+})
+
+app.get('/signin', function(req, res) {
+  res.render('index')
+})
+
 server = app.listen(port, function (err) {
   if (err) return console.log('Error'), process.exit(1)
 
