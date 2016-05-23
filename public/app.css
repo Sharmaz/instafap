@@ -6202,3 +6202,48 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 @media (min-height: 40.125em) {
   .picker--time .picker__box {
     margin-bottom: 5em; } }
+
+body {
+  background: #fafafa;
+  color: #125688;
+  font-family: Montserrat; }
+
+#main-container {
+  margin: 30px auto; }
+
+.iphone {
+  max-width: 100%; }
+
+.site-footer {
+  text-transform: uppercase;
+  font-size: 12px; }
+
+.login-box,
+.signup-box {
+  background-color: white;
+  border: 1px solid #edeeee;
+  border-radius: 3px;
+  padding: 10px 0;
+  text-align: center; }
+
+.signup-box .platzigram {
+  font-family: 'Oleo Script';
+  font-size: 42px; }
+
+.signup-form {
+  width: 65%;
+  margin: 0 auto; }
+
+.signup-form h2 {
+  color: #a5a7aa;
+  font-size: 1.2em; }
+
+.signup-form .btn.btn-fb, .signup-form .btn-fb.btn-large {
+  background-color: #4090db;
+  font-size: .8em; }
+
+.signup-form .btn.btn-fb:hover, .signup-form .btn-fb.btn-large:hover {
+  background-color: #2d6599; }
+
+.signup-form .btn.btn-signup, .signup-form .btn-signup.btn-large {
+  background-color: #125688; }
