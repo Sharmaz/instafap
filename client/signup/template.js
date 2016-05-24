@@ -4,12 +4,12 @@ var landing = require('../landing')
 var signupForm = yo`<div class="col s12 m7">
     <div class="row">
       <div class="signup-box">
-        <h1 class="platzigram">Platzigram</h1>
+        <h1 class="instafap">InstaFap</h1>
         <form class="signup-form">
-          <h2>Regístrate para ver fotos de tus amigos estudiando en Platzi</h2>
+          <h2>Regístrate para ver fotos de tus amigos</h2>
           <div class="section">
             <a class="btn btn-fb hide-on-small-only">Iniciar sesión con Facebook</a>
-            <a class="btn btn-fb hide-on-med-and-up">Iniciar sesión</a>
+            <a class="btn btn-fb hide-on-med-and-up"><i class="fa fa-facebook-official"></i>Iniciar sesión</a>
           </div>
           <div class="divider"></div>
           <div class="section">

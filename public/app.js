@@ -1,12 +1,30 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var page = require('page');
+var empty = require('empty-element');
+var template = require('./template');
+var title = require('title');
 
 page('/', function (ctx, next) {
+  title('InstaFap');
   var main = document.getElementById('main-container');
-  main.innerHTML = '<a href="/signup">SignUP</a>';
+  empty(main).appendChild(template);
 });
 
-},{"page":11}],2:[function(require,module,exports){
+},{"./template":2,"empty-element":12,"page":13,"title":16}],2:[function(require,module,exports){
+var yo = require('yo-yo');
+var layout = require('../layout');
+
+var template = yo`<div class="container timeline">
+  <div class="row">
+    <div class="col s12 m10 offset-m1 l6 offset-l3">
+    Content
+    </div>
+  </div>
+</div>`;
+
+module.exports = layout(template);
+
+},{"../layout":5,"yo-yo":17}],3:[function(require,module,exports){
 var page = require('page');
 
 require('./homepage');
@@ -15,12 +33,12 @@ require('./signin');
 
 page();
 
-},{"./homepage":1,"./signin":4,"./signup":6,"page":11}],3:[function(require,module,exports){
+},{"./homepage":1,"./signin":6,"./signup":8,"page":13}],4:[function(require,module,exports){
 var yo = require('yo-yo');
 
 module.exports = function landing(box) {
 
-  return yo`<div class="container">
+  return yo`<div class="container landing">
       <div class="row">
         <div class="col s10 push-s1">
           <div class="row">
@@ -34,7 +52,37 @@ module.exports = function landing(box) {
     </div>`;
 };
 
-},{"yo-yo":15}],4:[function(require,module,exports){
+},{"yo-yo":17}],5:[function(require,module,exports){
+var yo = require('yo-yo');
+
+module.exports = function layout(content) {
+  return yo`<div>
+  <nav class="header">
+    <div class="nav-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m6 offset-m1">
+            <a href="/" class="instafap brand-logo">InstaFap</a>
+          </div>
+            <div class="col s2 m6 push-s10 push-m10">
+              <a href="#" class="btn btn-large btn-flat dropdown-button" data-activates="drop-user">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </a>
+              <ul id="drop-user" class="dropdown-content">
+                <li><a href="#">Salir</a></li>
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="content">
+  ${ content }
+  </div>
+</div>`;
+};
+
+},{"yo-yo":17}],6:[function(require,module,exports){
 var page = require('page');
 var empty = require('empty-element');
 var template = require('./template');
@@ -46,18 +94,18 @@ page('/signin', function (ctx, next) {
   empty(main).appendChild(template);
 });
 
-},{"./template":5,"empty-element":10,"page":11,"title":14}],5:[function(require,module,exports){
+},{"./template":7,"empty-element":12,"page":13,"title":16}],7:[function(require,module,exports){
 var yo = require('yo-yo');
 var landing = require('../landing');
 
 var signinForm = yo`<div class="col s12 m7">
     <div class="row">
       <div class="signup-box">
-        <h1 class="platzigram">Platzigram</h1>
+        <h1 class="instafap">InstaFap</h1>
         <form class="signup-form">
           <div class="section">
             <a class="btn btn-fb hide-on-small-only">Iniciar sesión con Facebook</a>
-            <a class="btn btn-fb hide-on-med-and-up">Iniciar sesión</a>
+            <a class="btn btn-fb hide-on-med-and-up"><i class="fa fa-facebook-official"></i>Iniciar sesión</a>
           </div>
           <div class="divider"></div>
           <div class="section">
@@ -77,7 +125,7 @@ var signinForm = yo`<div class="col s12 m7">
 
 module.exports = landing(signinForm);
 
-},{"../landing":3,"yo-yo":15}],6:[function(require,module,exports){
+},{"../landing":4,"yo-yo":17}],8:[function(require,module,exports){
 var page = require('page');
 var empty = require('empty-element');
 var template = require('./template');
@@ -89,19 +137,19 @@ page('/signup', function (ctx, next) {
   empty(main).appendChild(template);
 });
 
-},{"./template":7,"empty-element":10,"page":11,"title":14}],7:[function(require,module,exports){
+},{"./template":9,"empty-element":12,"page":13,"title":16}],9:[function(require,module,exports){
 var yo = require('yo-yo');
 var landing = require('../landing');
 
 var signupForm = yo`<div class="col s12 m7">
     <div class="row">
       <div class="signup-box">
-        <h1 class="platzigram">Platzigram</h1>
+        <h1 class="instafap">InstaFap</h1>
         <form class="signup-form">
-          <h2>Regístrate para ver fotos de tus amigos estudiando en Platzi</h2>
+          <h2>Regístrate para ver fotos de tus amigos</h2>
           <div class="section">
             <a class="btn btn-fb hide-on-small-only">Iniciar sesión con Facebook</a>
-            <a class="btn btn-fb hide-on-med-and-up">Iniciar sesión</a>
+            <a class="btn btn-fb hide-on-med-and-up"><i class="fa fa-facebook-official"></i>Iniciar sesión</a>
           </div>
           <div class="divider"></div>
           <div class="section">
@@ -123,9 +171,9 @@ var signupForm = yo`<div class="col s12 m7">
 
 module.exports = landing(signupForm);
 
-},{"../landing":3,"yo-yo":15}],8:[function(require,module,exports){
+},{"../landing":4,"yo-yo":17}],10:[function(require,module,exports){
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -221,7 +269,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /* global HTMLElement */
 
 'use strict'
@@ -236,7 +284,7 @@ module.exports = function emptyElement (element) {
   return element
 }
 
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 (function (process){
   /* globals require, module */
 
@@ -862,7 +910,7 @@ module.exports = function emptyElement (element) {
   page.sameOrigin = sameOrigin;
 
 }).call(this,require('_process'))
-},{"_process":9,"path-to-regexp":12}],12:[function(require,module,exports){
+},{"_process":11,"path-to-regexp":14}],14:[function(require,module,exports){
 var isarray = require('isarray')
 
 /**
@@ -1254,12 +1302,12 @@ function pathToRegexp (path, keys, options) {
   return stringToRegexp(path, keys, options)
 }
 
-},{"isarray":13}],13:[function(require,module,exports){
+},{"isarray":15}],15:[function(require,module,exports){
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 
 var orig = document.title;
 
@@ -1282,7 +1330,7 @@ exports.reset = function(){
   set(orig);
 };
 
-},{}],15:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var bel = require('bel') // turns template tag into DOM elements
 var morphdom = require('morphdom') // efficiently diffs + morphs two DOM elements
 var defaultEvents = require('./update-events.js') // default events to be copied when dom elements update
@@ -1318,7 +1366,7 @@ module.exports.update = function (fromNode, toNode, opts) {
   }
 }
 
-},{"./update-events.js":21,"bel":16,"morphdom":20}],16:[function(require,module,exports){
+},{"./update-events.js":23,"bel":18,"morphdom":22}],18:[function(require,module,exports){
 var document = require('global/document')
 var hyperx = require('hyperx')
 
@@ -1439,7 +1487,7 @@ function belCreateElement (tag, props, children) {
 module.exports = hyperx(belCreateElement)
 module.exports.createElement = belCreateElement
 
-},{"global/document":17,"hyperx":18}],17:[function(require,module,exports){
+},{"global/document":19,"hyperx":20}],19:[function(require,module,exports){
 (function (global){
 var topLevel = typeof global !== 'undefined' ? global :
     typeof window !== 'undefined' ? window : {}
@@ -1458,7 +1506,7 @@ if (typeof document !== 'undefined') {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"min-document":8}],18:[function(require,module,exports){
+},{"min-document":10}],20:[function(require,module,exports){
 var attrToProp = require('hyperscript-attribute-to-property')
 
 var VAR = 0, TEXT = 1, OPEN = 2, CLOSE = 3, ATTR = 4
@@ -1723,7 +1771,7 @@ var closeRE = RegExp('^(' + [
 ].join('|') + ')(?:[\.#][a-zA-Z0-9\u007F-\uFFFF_:-]+)*$')
 function selfClosing (tag) { return closeRE.test(tag) }
 
-},{"hyperscript-attribute-to-property":19}],19:[function(require,module,exports){
+},{"hyperscript-attribute-to-property":21}],21:[function(require,module,exports){
 module.exports = attributeToProperty
 
 var transform = {
@@ -1744,7 +1792,7 @@ function attributeToProperty (h) {
   }
 }
 
-},{}],20:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 // Create a range object for efficently rendering strings to elements.
 var range;
 
@@ -2243,7 +2291,7 @@ function morphdom(fromNode, toNode, options) {
 
 module.exports = morphdom;
 
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 module.exports = [
   // attribute events (can be set with attributes)
   'onclick',
@@ -2281,4 +2329,4 @@ module.exports = [
   'onfocusout'
 ]
 
-},{}]},{},[2]);
+},{}]},{},[3]);
