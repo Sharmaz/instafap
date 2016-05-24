@@ -11,15 +11,15 @@ app.set('view engine', 'pug')
 app.use(express.static('public'))
 
 app.get('/', function(req, res) {
-  res.render('index')
+  res.render('index', { title: 'InstaFap' })
 })
 
 app.get('/signup', function(req, res) {
-  res.render('index')
+  res.render('index', { title: 'InstaFap - SignUp' })
 })
 
 app.get('/signin', function(req, res) {
-  res.render('index')
+  res.render('index', { title: 'InstaFap - SignIn' })
 })
 
 server = app.listen(port, function (err) {
