@@ -32,6 +32,7 @@
     "moment": "^2.13.0",
     "page": "^1.7.1",
     "pug": "^2.0.0-alpha8",
+    "superagent": "^2.0.0-alpha.3",
     "title": "^1.0.0",
     "yo-yo": "^1.2.0"
   },
