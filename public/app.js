@@ -82,9 +82,22 @@ function loadPictures(ctx, next) {
 var yo = require('yo-yo');
 var layout = require('../layout');
 var picture = require('../picture-card');
+var translate = require('../translate');
 
 module.exports = function (pictures) {
   var el = yo`<div class="container timeline">
+  <div class="row">
+    <div class="col s12 m10 offset-m1 l8 offset-l2 center-align">
+      <form enctype="multipart/form-data" class="form-upload" #id="formUpload">
+        <div id="fileName" class="fileUpload btn btn-flat cyan">
+          <span><i class="fa fa-camera" aria-hidden="true"></i> ${ translate.message('upload-picture') }</span>
+          <input name="picture" type="file" class="upload" onchange=${ onchange }/>
+        </div>
+        <button id="btnUpload" type="submit" class="btn btn-flat cyan hide">${ translate.message('upload') }</button>
+        <button id="btnCancel" type="button" class="btn btn-flat red hide" onclick=${ cancel }><i class="fa fa-times" aria-hidden="true"></i></button>
+      </form>
+    </div>
+  </div>
   <div class="row">
     <div class="col s12 m10 offset-m1 l6 offset-l3">
     ${ pictures.map(function (pic) {
@@ -94,10 +107,25 @@ module.exports = function (pictures) {
   </div>
 </div>`;
 
+  function toggleButtons() {
+    document.getElementById('fileName').classList.toggle('hide');
+    document.getElementById('btnUpload').classList.toggle('hide');
+    document.getElementById('btnCancel').classList.toggle('hide');
+  }
+
+  function cancel() {
+    toggleButtons();
+    document.getElementById('formUpload').reset();
+  }
+
+  function onchange() {
+    toggleButtons();
+  }
+
   return layout(el);
 };
 
-},{"../layout":7,"../picture-card":8,"yo-yo":59}],5:[function(require,module,exports){
+},{"../layout":7,"../picture-card":8,"../translate":15,"yo-yo":59}],5:[function(require,module,exports){
 var page = require('page');
 // var moment = require('moment')
 // require('moment/locale/es')
@@ -289,7 +317,10 @@ module.exports = {
         'signup.have-account': 'Already have an account?',
         'signin': 'Signin',
         'signin.not-have-account': 'Don\'t have and account?',
-        'language': 'Language'
+        'language': 'Language',
+        'upload-picture': 'Upload Picture',
+        'upload': 'Upload'
+
 };
 
 },{}],14:[function(require,module,exports){
@@ -309,7 +340,9 @@ module.exports = {
   'signup.have-account': '¿Tienes una cuenta?',
   'signin': 'Entrar',
   'signin.not-have-account': '¿No tienes una cuenta?',
-  'language': 'Idioma'
+  'language': 'Idioma',
+  'upload-picture': 'Subir Foto',
+  'upload': 'Subir'
 };
 
 },{}],15:[function(require,module,exports){
