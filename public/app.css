@@ -6282,6 +6282,16 @@ body {
   line-height: 30px;
   margin-left: 12px; }
 
+.userpics {
+  width: 95%; }
+
+.profile-avatar {
+  width: 50%;
+  border: 0.5px solid #125688; }
+
+.profile-username {
+  font-size: 2rem; }
+
 .card i {
   font-size: 30px; }
 

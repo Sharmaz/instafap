@@ -37,6 +37,10 @@ app.get('/signin', function(req, res) {
   res.render('index', { title: 'InstaFap - SignIn' })
 })
 
+app.get('/user', function(req, res) {
+  res.render('index', { title: 'InstaFap - User' })
+})
+
 app.get('/api/pictures', function(req, res, next) {
   var pictures = [ 
     {
@@ -58,6 +62,16 @@ app.get('/api/pictures', function(req, res, next) {
       likes: 1,
       liked: true,
       createdAt: new Date().setDate(new Date().getDate() - 10)
+    },
+    {
+      user:{
+        username: 'sharmaz',
+        avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
+      },
+      url: 'office.jpg',
+      likes: 1,
+      liked: true,
+      createdAt: new Date().setDate(new Date().getDate() - 12)
     }
   ]
   setTimeout(function() {

@@ -100,6 +100,16 @@ $avatar-size: 48px;
   line-height: 30px;
   margin-left: 12px;
 }
+.userpics {
+  width: 95%;
+}
+.profile-avatar {
+  width: 50%;
+  border: .5px solid $secondary-color;
+}
+.profile-username {
+  font-size: 2rem;
+}
 
 .card i {
   font-size: 30px;

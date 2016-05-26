@@ -5,14 +5,14 @@ var title = require('title')
 var request = require('superagent')
 var header = require('../header')
 
-page('/', header, loadPictures, function (ctx, next) {
+page('/user', header, loadUser, function (ctx, next) {
   title('InstaFap')
   var main = document.getElementById('main-container')
   
   empty(main).appendChild(template(ctx.pictures))
 })
 
-function loadPictures(ctx, next) {
+function loadUser(ctx, next) {
   request
     .get('/api/pictures')
     .end(function(err, res) {
