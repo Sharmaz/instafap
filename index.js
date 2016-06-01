@@ -37,48 +37,56 @@ app.get('/signin', function(req, res) {
   res.render('index', { title: 'InstaFap - SignIn' })
 })
 
-app.get('/user', function(req, res) {
-  res.render('index', { title: 'InstaFap - User' })
+app.get('/user/:username', function(req, res, next) {
+
+  var username = req.params.username
+
+  if (username === pictures[0].user.username) {
+    res.render('index', { title: 'Instafap - Profile', username: req.params.username })
+  }
+  else {
+    res.send('Error 404, user ' + username + ' Not Found')
+  }
 })
 
 app.get('/api/pictures', function(req, res, next) {
-  var pictures = [ 
-    {
-      user:{
-        username: 'sharmaz',
-        avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
-      },
-      url: 'office.jpg',
-      likes: 0,
-      liked: false,
-      createdAt: new Date().getTime()
-    },
-    {
-      user:{
-        username: 'sharmaz',
-        avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
-      },
-      url: 'office.jpg',
-      likes: 1,
-      liked: true,
-      createdAt: new Date().setDate(new Date().getDate() - 10)
-    },
-    {
-      user:{
-        username: 'sharmaz',
-        avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
-      },
-      url: 'office.jpg',
-      likes: 1,
-      liked: true,
-      createdAt: new Date().setDate(new Date().getDate() - 12)
-    }
-  ]
   setTimeout(function() {
     res.send(pictures)
-
   },2000)
 })
+
+var pictures = [ 
+  {
+    user:{
+      username: 'sharmaz',
+      avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
+    },
+    url: 'http://localhost:3000/office.jpg',
+    likes: 0,
+    liked: false,
+    createdAt: new Date().getTime()
+  },
+  {
+    user:{
+      username: 'sharmaz',
+      avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
+    },
+    url: 'http://localhost:3000/office.jpg',
+    likes: 1,
+    liked: true,
+    createdAt: new Date().setDate(new Date().getDate() - 10)
+  },
+  {
+    user:{
+      username: 'sharmaz',
+      avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
+    },
+    url: 'http://localhost:3000/office.jpg',
+    likes: 1,
+    liked: true,
+    createdAt: new Date().setDate(new Date().getDate() - 12)
+  }
+]
 
 app.post('/api/pictures', function(req, res) {
   upload(req, res, function(err) {

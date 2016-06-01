@@ -5,8 +5,8 @@ var title = require('title')
 var request = require('superagent')
 var header = require('../header')
 
-page('/user', header, loadUser, function (ctx, next) {
-  title('InstaFap')
+page('/user/:username', header, loadUser, function (ctx, next) {
+  title('InstaFap - Profile')
   var main = document.getElementById('main-container')
   
   empty(main).appendChild(template(ctx.pictures))

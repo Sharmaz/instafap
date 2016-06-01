@@ -141,11 +141,11 @@ var page = require('page');
 // require('moment/locale/es')
 // moment.locale('es')
 
-require('./user');
 require('./homepage');
 require('./signup');
 require('./signin');
 require('./footer');
+require('./user');
 
 page();
 
@@ -428,8 +428,8 @@ var title = require('title');
 var request = require('superagent');
 var header = require('../header');
 
-page('/user', header, loadUser, function (ctx, next) {
-  title('InstaFap');
+page('/user/:username', header, loadUser, function (ctx, next) {
+  title('InstaFap - Profile');
   var main = document.getElementById('main-container');
 
   empty(main).appendChild(template(ctx.pictures));
