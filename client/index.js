@@ -9,5 +9,4 @@ require('./signin')
 require('./footer')
 require('./user')
 
-
 page()

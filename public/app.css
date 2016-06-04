@@ -6283,9 +6283,35 @@ body {
   margin-left: 12px; }
 
 .userpics {
-  width: 95%; }
+  margin-top: 16px;
+  width: 95%;
+  table-layout: fixed;
+  border-collapse: collapse; }
+
+.userpics:hover {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px); }
+
+.userpics:hover ~ .user-likes {
+  visibility: visible; }
+
+.user-likes {
+  z-index: 1;
+  visibility: hidden;
+  position: absolute;
+  margin-left: 8%;
+  margin-top: -12%;
+  color: white;
+  font-size: 32px; }
+
+.user-likes span {
+  vertical-align: top;
+  font-size: 22px; }
 
 .profile-avatar {
+  margin-top: 10px;
   width: 50%;
   border: 0.5px solid #125688; }
 

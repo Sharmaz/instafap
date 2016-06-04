@@ -37,22 +37,10 @@ app.get('/signin', function(req, res) {
   res.render('index', { title: 'InstaFap - SignIn' })
 })
 
-app.get('/user/:username', function(req, res, next) {
-
-  var username = req.params.username
-
-  if (username === pictures[0].user.username) {
-    res.render('index', { title: 'Instafap - Profile', username: req.params.username })
-  }
-  else {
-    res.send('Error 404, user ' + username + ' Not Found')
-  }
-})
-
 app.get('/api/pictures', function(req, res, next) {
   setTimeout(function() {
     res.send(pictures)
-  },2000)
+  },500)
 })
 
 var pictures = [ 
@@ -61,7 +49,7 @@ var pictures = [
       username: 'sharmaz',
       avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
     },
-    url: 'http://localhost:3000/office.jpg',
+    url: 'office.jpg',
     likes: 0,
     liked: false,
     createdAt: new Date().getTime()
@@ -71,7 +59,7 @@ var pictures = [
       username: 'sharmaz',
       avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
     },
-    url: 'http://localhost:3000/office.jpg',
+    url: 'office.jpg',
     likes: 1,
     liked: true,
     createdAt: new Date().setDate(new Date().getDate() - 10)
@@ -81,7 +69,7 @@ var pictures = [
       username: 'sharmaz',
       avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
     },
-    url: 'http://localhost:3000/office.jpg',
+    url: 'office.jpg',
     likes: 1,
     liked: true,
     createdAt: new Date().setDate(new Date().getDate() - 12)
@@ -95,6 +83,52 @@ app.post('/api/pictures', function(req, res) {
     }
     res.send('File uploaded')
   })
+})
+
+app.get('/api/user/:username', function (req, res) {
+  const user = {
+    username: 'sharmaz',
+    avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460',
+    pictures: [
+      {
+        id: 1,
+        src: 'https://scontent-dfw1-1.cdninstagram.com/t51.2885-15/e15/11202982_836063153143271_896041128_n.jpg',
+        likes: 3
+      },
+      {
+        id: 2,
+        src: 'https://scontent-dfw1-1.cdninstagram.com/t51.2885-15/e15/11195843_359547577569706_1093189504_n.jpg',
+        likes: 5
+      },
+      {
+        id: 3,
+        src: 'https://scontent-dfw1-1.cdninstagram.com/t51.2885-15/e15/11203440_1622018988021771_1437211436_n.jpg',
+        likes: 23
+      },
+      {
+        id: 4,
+        src: 'https://scontent-dfw1-1.cdninstagram.com/t51.2885-15/e15/11203293_467357133421593_1900711866_n.jpg',
+        likes: 10
+      },
+      {
+        id: 5,
+        src: 'https://scontent-dfw1-1.cdninstagram.com/t51.2885-15/e15/11192793_897328383639687_1012861450_n.jpg',
+        likes: 2
+      },
+      {
+        id: 6,
+        src: 'https://scontent-dfw1-1.cdninstagram.com/t51.2885-15/e15/11184439_354442844751974_1642182317_n.jpg',
+        likes: 7
+      },
+    ] 
+  }
+  res.send(user)
+})
+
+app.get('/:username', function(req, res, next) {
+  var user = req.params.username
+  res.render('index', { title: 'Instafap - ${user}', username: user })
+
 })
 
 server = app.listen(port, function (err) {
