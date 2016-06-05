@@ -122,7 +122,10 @@ app.get('/api/user/:username', function (req, res) {
       },
     ] 
   }
-  res.send(user)
+  setTimeout(function() {
+    res.send(user)
+  }, 500)
+  
 })
 
 app.get('/:username', function(req, res, next) {
