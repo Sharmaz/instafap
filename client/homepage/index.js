@@ -5,6 +5,7 @@ var title = require('title')
 var request = require('superagent')
 var header = require('../header')
 var Webcam = require('webcamjs')
+var picture = require('../picture-card')
 
 page('/', header, loadPictures, function (ctx, next) {
   title('InstaFap')
@@ -43,6 +44,22 @@ page('/', header, loadPictures, function (ctx, next) {
                 uploadButton.removeClass('hide')
                 shootButton.addClass('hide')
                 camaraInput.addClass('hide')
+                uploadButton.off('click')
+                uploadButton.click(() => {
+                  const pic = {
+                    url: data_uri,
+                    likes: 0,
+                    liked: false,
+                    createdAt: new Date(),
+                    user: {
+                      username: 'sharmaz',
+                      avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
+                    }
+                  }
+                  $('#picture-cards').prepend(picture(pic))
+                  reset()
+                  $('#modalCamara').closeModal()
+                })
             })
       })
     },
