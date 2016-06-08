@@ -8,11 +8,18 @@ module.exports = function(pictures) {
   var el = yo`<div class="container timeline">
     <div id="modalCamara" class="modal center-align">
       <div class="modal-content">
-        <div class="camara-picture center-align s12 m10 l8" id="camara-input"></div>
+        <div class="camara-picture center-align" id="camara-input"></div>
+        <div class="camara-picture center-align hide" id="picture-preview"></div>      
       </div>
-      <div class="modal-footer">
-        <button class="waves-effect waves-light btn" id="shoot">
+      <div class="footers-buttons center-align">
+        <button class="footers-buttons waves-effect waves-light btn" id="shoot">
           <i class="fa fa-camera"></i>
+        </button>
+        <button class="footers-buttons waves-effect waves-light cyan btn hide" id="uploadButton">
+          <i class="fa fa-cloud-upload"></i>
+        </button>
+        <button class="footers-buttons waves-effect waves-light red btn hide" id="cancelPicture">
+          <i class="fa fa-times"></i>
         </button>
       </div>
     </div>

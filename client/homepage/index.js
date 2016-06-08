@@ -12,6 +12,22 @@ page('/', header, loadPictures, function (ctx, next) {
   
   empty(main).appendChild(template(ctx.pictures))
   
+  const picturePreview = $('#picture-preview')
+  const camaraInput = $('#camara-input')
+  const cancelPicture = $('#cancelPicture')
+  const shootButton = $('#shoot')
+  const uploadButton = $('#uploadButton')
+
+  function reset() {
+    picturePreview.addClass('hide')
+    cancelPicture.addClass('hide')
+    uploadButton.addClass('hide')
+    shootButton.removeClass('hide')
+    camaraInput.removeClass('hide')
+  }
+
+  cancelPicture.click(reset)
+
   $('.modal-trigger').leanModal({
     ready: function() {
       Webcam.set({
@@ -19,9 +35,20 @@ page('/', header, loadPictures, function (ctx, next) {
         height: 240
       })
       Webcam.attach('#camara-input')
+      shootButton.click((ev) => {
+        Webcam.snap((data_uri) => {
+                picturePreview.html(`<img src="${data_uri}"/>`)
+                picturePreview.removeClass('hide')
+                cancelPicture.removeClass('hide')
+                uploadButton.removeClass('hide')
+                shootButton.addClass('hide')
+                camaraInput.addClass('hide')
+            })
+      })
     },
     complete: function() {
       Webcam.reset()
+      reset()
     }
   })
 })

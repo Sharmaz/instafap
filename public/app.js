@@ -57,6 +57,22 @@ page('/', header, loadPictures, function (ctx, next) {
 
   empty(main).appendChild(template(ctx.pictures));
 
+  var picturePreview = $('#picture-preview');
+  var camaraInput = $('#camara-input');
+  var cancelPicture = $('#cancelPicture');
+  var shootButton = $('#shoot');
+  var uploadButton = $('#uploadButton');
+
+  function reset() {
+    picturePreview.addClass('hide');
+    cancelPicture.addClass('hide');
+    uploadButton.addClass('hide');
+    shootButton.removeClass('hide');
+    camaraInput.removeClass('hide');
+  }
+
+  cancelPicture.click(reset);
+
   $('.modal-trigger').leanModal({
     ready: function ready() {
       Webcam.set({
@@ -64,9 +80,20 @@ page('/', header, loadPictures, function (ctx, next) {
         height: 240
       });
       Webcam.attach('#camara-input');
+      shootButton.click(function (ev) {
+        Webcam.snap(function (data_uri) {
+          picturePreview.html('<img src="' + data_uri + '"/>');
+          picturePreview.removeClass('hide');
+          cancelPicture.removeClass('hide');
+          uploadButton.removeClass('hide');
+          shootButton.addClass('hide');
+          camaraInput.addClass('hide');
+        });
+      });
     },
     complete: function complete() {
       Webcam.reset();
+      reset();
     }
   });
 });
@@ -83,7 +110,7 @@ function loadPictures(ctx, next) {
 },{"../header":2,"./template":4,"empty-element":317,"page":339,"superagent":342,"title":348,"webcamjs":349}],4:[function(require,module,exports){
 'use strict';
 
-var _templateObject = _taggedTemplateLiteral(['<div class="container timeline">\n    <div id="modalCamara" class="modal center-align">\n      <div class="modal-content">\n        <div class="camara-picture center-align s12 m10 l8" id="camara-input"></div>\n      </div>\n      <div class="modal-footer">\n        <button class="waves-effect waves-light btn" id="shoot">\n          <i class="fa fa-camera"></i>\n        </button>\n      </div>\n    </div>\n  <div class="row">\n    <div class="col s12 m10 offset-m1 l8 offset-l2 center-align">\n      <form enctype="multipart/form-data" class="form-upload" #id="formUpload" onsubmit=', '>\n        <a href="#modalCamara" class="waves-effect waves-light btn modal-trigger">\n          <i class="fa fa-camera"></i>\n        </a>\n        <div id="fileName" class="fileUpload btn btn-flat cyan">\n          <span><i class="fa fa-cloud-upload" aria-hidden="true"></i> ', '</span>\n          <input name="picture" type="file" class="upload" onchange=', '/>\n        </div>\n        <button id="btnUpload" type="submit" class="btn btn-flat cyan hide">', '</button>\n        <button id="btnCancel" type="button" class="btn btn-flat red hide" onclick=', '><i class="fa fa-times" aria-hidden="true"></i></button>\n      </form>\n    </div>\n  </div>\n  <div class="row">\n    <div class="col s12 m10 offset-m1 l6 offset-l3">\n    ', '\n    </div>\n  </div>\n</div>'], ['<div class="container timeline">\n    <div id="modalCamara" class="modal center-align">\n      <div class="modal-content">\n        <div class="camara-picture center-align s12 m10 l8" id="camara-input"></div>\n      </div>\n      <div class="modal-footer">\n        <button class="waves-effect waves-light btn" id="shoot">\n          <i class="fa fa-camera"></i>\n        </button>\n      </div>\n    </div>\n  <div class="row">\n    <div class="col s12 m10 offset-m1 l8 offset-l2 center-align">\n      <form enctype="multipart/form-data" class="form-upload" #id="formUpload" onsubmit=', '>\n        <a href="#modalCamara" class="waves-effect waves-light btn modal-trigger">\n          <i class="fa fa-camera"></i>\n        </a>\n        <div id="fileName" class="fileUpload btn btn-flat cyan">\n          <span><i class="fa fa-cloud-upload" aria-hidden="true"></i> ', '</span>\n          <input name="picture" type="file" class="upload" onchange=', '/>\n        </div>\n        <button id="btnUpload" type="submit" class="btn btn-flat cyan hide">', '</button>\n        <button id="btnCancel" type="button" class="btn btn-flat red hide" onclick=', '><i class="fa fa-times" aria-hidden="true"></i></button>\n      </form>\n    </div>\n  </div>\n  <div class="row">\n    <div class="col s12 m10 offset-m1 l6 offset-l3">\n    ', '\n    </div>\n  </div>\n</div>']);
+var _templateObject = _taggedTemplateLiteral(['<div class="container timeline">\n    <div id="modalCamara" class="modal center-align">\n      <div class="modal-content">\n        <div class="camara-picture center-align" id="camara-input"></div>\n        <div class="camara-picture center-align hide" id="picture-preview"></div>      \n      </div>\n      <div class="footers-buttons center-align">\n        <button class="footers-buttons waves-effect waves-light btn" id="shoot">\n          <i class="fa fa-camera"></i>\n        </button>\n        <button class="footers-buttons waves-effect waves-light cyan btn hide" id="uploadButton">\n          <i class="fa fa-cloud-upload"></i>\n        </button>\n        <button class="footers-buttons waves-effect waves-light red btn hide" id="cancelPicture">\n          <i class="fa fa-times"></i>\n        </button>\n      </div>\n    </div>\n  <div class="row">\n    <div class="col s12 m10 offset-m1 l8 offset-l2 center-align">\n      <form enctype="multipart/form-data" class="form-upload" #id="formUpload" onsubmit=', '>\n        <a href="#modalCamara" class="waves-effect waves-light btn modal-trigger">\n          <i class="fa fa-camera"></i>\n        </a>\n        <div id="fileName" class="fileUpload btn btn-flat cyan">\n          <span><i class="fa fa-cloud-upload" aria-hidden="true"></i> ', '</span>\n          <input name="picture" type="file" class="upload" onchange=', '/>\n        </div>\n        <button id="btnUpload" type="submit" class="btn btn-flat cyan hide">', '</button>\n        <button id="btnCancel" type="button" class="btn btn-flat red hide" onclick=', '><i class="fa fa-times" aria-hidden="true"></i></button>\n      </form>\n    </div>\n  </div>\n  <div class="row">\n    <div class="col s12 m10 offset-m1 l6 offset-l3">\n    ', '\n    </div>\n  </div>\n</div>'], ['<div class="container timeline">\n    <div id="modalCamara" class="modal center-align">\n      <div class="modal-content">\n        <div class="camara-picture center-align" id="camara-input"></div>\n        <div class="camara-picture center-align hide" id="picture-preview"></div>      \n      </div>\n      <div class="footers-buttons center-align">\n        <button class="footers-buttons waves-effect waves-light btn" id="shoot">\n          <i class="fa fa-camera"></i>\n        </button>\n        <button class="footers-buttons waves-effect waves-light cyan btn hide" id="uploadButton">\n          <i class="fa fa-cloud-upload"></i>\n        </button>\n        <button class="footers-buttons waves-effect waves-light red btn hide" id="cancelPicture">\n          <i class="fa fa-times"></i>\n        </button>\n      </div>\n    </div>\n  <div class="row">\n    <div class="col s12 m10 offset-m1 l8 offset-l2 center-align">\n      <form enctype="multipart/form-data" class="form-upload" #id="formUpload" onsubmit=', '>\n        <a href="#modalCamara" class="waves-effect waves-light btn modal-trigger">\n          <i class="fa fa-camera"></i>\n        </a>\n        <div id="fileName" class="fileUpload btn btn-flat cyan">\n          <span><i class="fa fa-cloud-upload" aria-hidden="true"></i> ', '</span>\n          <input name="picture" type="file" class="upload" onchange=', '/>\n        </div>\n        <button id="btnUpload" type="submit" class="btn btn-flat cyan hide">', '</button>\n        <button id="btnCancel" type="button" class="btn btn-flat red hide" onclick=', '><i class="fa fa-times" aria-hidden="true"></i></button>\n      </form>\n    </div>\n  </div>\n  <div class="row">\n    <div class="col s12 m10 offset-m1 l6 offset-l3">\n    ', '\n    </div>\n  </div>\n</div>']);
 
 function _taggedTemplateLiteral(strings, raw) {
   return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
