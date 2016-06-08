@@ -134,10 +134,10 @@ app.get('/:username', function(req, res, next) {
 
 })
 
-app.get('/picture/:id', function(req, res, next) {
-  var id = req.params.id
-  res.render('index', { title: 'Instafap - Picture', id: id })
-})
+// app.get('/picture/:id', function(req, res, next) {
+//   var id = req.params.id
+//   res.send({ id: id })
+// })
 
 server = app.listen(port, function (err) {
   if (err) return console.log('Error'), process.exit(1)

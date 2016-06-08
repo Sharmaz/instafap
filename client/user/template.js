@@ -35,7 +35,6 @@ module.exports = function userPageTemplate(user) {
       <p><i class="fa fa-heart left modal-likes" aria-hidden="true" id="${picture.id}"></i><span class="likes left valign">${picture.likes}</span></p>
       </div>
     </div>
-
   </div>
   <script>$('.modal-trigger').leanModal()</script>
   </div>`
@@ -50,10 +49,6 @@ module.exports = function userPageTemplate(user) {
 
 /* 
 /user/picture/id 
-info de usuario
-likes 
-
-
 */
 
   

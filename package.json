@@ -36,6 +36,7 @@
     "pug": "^2.0.0-alpha8",
     "superagent": "^2.0.0-alpha.3",
     "title": "^1.0.0",
+    "webcamjs": "^1.0.6",
     "yo-yo": "^1.2.0"
   },
   "devDependencies": {
