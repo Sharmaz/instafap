@@ -50,7 +50,7 @@ page('/', header, loadPictures, function (ctx, next) {
                     url: data_uri,
                     likes: 0,
                     liked: false,
-                    createdAt: new Date(),
+                    createdAt: +new Date(),
                     user: {
                       username: 'sharmaz',
                       avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'

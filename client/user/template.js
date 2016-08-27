@@ -17,7 +17,7 @@ module.exports = function userPageTemplate(user) {
     ${user.pictures.map(function(picture) {
       return yo`<div class="col s12 m6 l4">
     <div class="s12 m6 l4">
-      <a class="userpics modal-trigger" href="#modal-${picture.id}"><img class="activator userpics" src="${picture.src}" id="${picture.id}"/></a>
+      <a class="userpics modal-trigger" href="/${user.username}/${picture.id}"><img class="activator userpics" src="${picture.src}" id="${picture.id}"/></a>
       <div class="s12 m6 l4 user-likes">
         <i class="fa fa-heart left" aria-hidden="true" id="${picture.id}"></i>
         <span class="left likes">${picture.likes}</span>
@@ -36,7 +36,6 @@ module.exports = function userPageTemplate(user) {
       </div>
     </div>
   </div>
-  <script>$('.modal-trigger').leanModal()</script>
   </div>`
       })}
     </div>

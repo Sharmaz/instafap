@@ -95,7 +95,7 @@ page('/', header, loadPictures, function (ctx, next) {
               url: data_uri,
               likes: 0,
               liked: false,
-              createdAt: new Date(),
+              createdAt: +new Date(),
               user: {
                 username: 'sharmaz',
                 avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
@@ -416,6 +416,19 @@ page('/:username', header, loadUser, function (ctx, next) {
   empty(main).appendChild(template(ctx.user));
 });
 
+page('/:username/:id', header, loadUser, function (ctx, next) {
+  title('InstaFap - ' + ctx.params.username);
+  var main = document.getElementById('main-container');
+
+  empty(main).appendChild(template(ctx.user));
+  $('#modal-' + ctx.params.id).openModal({
+    complete: function complete() {
+      page('/' + ctx.params.username);
+    }
+
+  });
+});
+
 function loadUser(ctx, next) {
   return regeneratorRuntime.async(function loadUser$(_context) {
     while (1) {
@@ -452,7 +465,7 @@ function loadUser(ctx, next) {
 'use strict';
 
 var _templateObject = _taggedTemplateLiteral(['<div class="container user-page">\n  <div class="row valign-wrapper">\n    <div class="col s6 m5 l5 left">\n    <img src="', '" class="circle s4 m4 l4 profile-avatar"/>\n    </div>\n    <div class="col s6 m6 l6 right">\n    <span class="profile-username valign">', '</span>\n    </div>\n  </div>\n  <div class="row">\n    <div class="col">\n    ', '\n    </div>\n  </div>\n</div>'], ['<div class="container user-page">\n  <div class="row valign-wrapper">\n    <div class="col s6 m5 l5 left">\n    <img src="', '" class="circle s4 m4 l4 profile-avatar"/>\n    </div>\n    <div class="col s6 m6 l6 right">\n    <span class="profile-username valign">', '</span>\n    </div>\n  </div>\n  <div class="row">\n    <div class="col">\n    ', '\n    </div>\n  </div>\n</div>']),
-    _templateObject2 = _taggedTemplateLiteral(['<div class="col s12 m6 l4">\n    <div class="s12 m6 l4">\n      <a class="userpics modal-trigger" href="#modal-', '"><img class="activator userpics" src="', '" id="', '"/></a>\n      <div class="s12 m6 l4 user-likes">\n        <i class="fa fa-heart left" aria-hidden="true" id="', '"></i>\n        <span class="left likes">', '</span>\n      </div>\n    </div>\n  <div id="modal-', '" class="modal">\n    <div class="row">\n      <div class="col s12 m8 l8">\n      <img class="modal-image" src="', '" id="', '"/>\n      </div>\n      <div class="col modal-text s12 m3 l3">\n      <h2 class="modal-title">Picture ', '</h2>\n      <img src="', '" class="circle s4 m4 l4 avatar"/>\n      <span class="valign profile-username">', '</span>\n      <p><i class="fa fa-heart left modal-likes" aria-hidden="true" id="', '"></i><span class="likes left valign">', '</span></p>\n      </div>\n    </div>\n  </div>\n  <script>$(\'.modal-trigger\').leanModal()</script>\n  </div>'], ['<div class="col s12 m6 l4">\n    <div class="s12 m6 l4">\n      <a class="userpics modal-trigger" href="#modal-', '"><img class="activator userpics" src="', '" id="', '"/></a>\n      <div class="s12 m6 l4 user-likes">\n        <i class="fa fa-heart left" aria-hidden="true" id="', '"></i>\n        <span class="left likes">', '</span>\n      </div>\n    </div>\n  <div id="modal-', '" class="modal">\n    <div class="row">\n      <div class="col s12 m8 l8">\n      <img class="modal-image" src="', '" id="', '"/>\n      </div>\n      <div class="col modal-text s12 m3 l3">\n      <h2 class="modal-title">Picture ', '</h2>\n      <img src="', '" class="circle s4 m4 l4 avatar"/>\n      <span class="valign profile-username">', '</span>\n      <p><i class="fa fa-heart left modal-likes" aria-hidden="true" id="', '"></i><span class="likes left valign">', '</span></p>\n      </div>\n    </div>\n  </div>\n  <script>$(\'.modal-trigger\').leanModal()</script>\n  </div>']);
+    _templateObject2 = _taggedTemplateLiteral(['<div class="col s12 m6 l4">\n    <div class="s12 m6 l4">\n      <a class="userpics modal-trigger" href="/', '/', '"><img class="activator userpics" src="', '" id="', '"/></a>\n      <div class="s12 m6 l4 user-likes">\n        <i class="fa fa-heart left" aria-hidden="true" id="', '"></i>\n        <span class="left likes">', '</span>\n      </div>\n    </div>\n  <div id="modal-', '" class="modal">\n    <div class="row">\n      <div class="col s12 m8 l8">\n      <img class="modal-image" src="', '" id="', '"/>\n      </div>\n      <div class="col modal-text s12 m3 l3">\n      <h2 class="modal-title">Picture ', '</h2>\n      <img src="', '" class="circle s4 m4 l4 avatar"/>\n      <span class="valign profile-username">', '</span>\n      <p><i class="fa fa-heart left modal-likes" aria-hidden="true" id="', '"></i><span class="likes left valign">', '</span></p>\n      </div>\n    </div>\n  </div>\n  </div>'], ['<div class="col s12 m6 l4">\n    <div class="s12 m6 l4">\n      <a class="userpics modal-trigger" href="/', '/', '"><img class="activator userpics" src="', '" id="', '"/></a>\n      <div class="s12 m6 l4 user-likes">\n        <i class="fa fa-heart left" aria-hidden="true" id="', '"></i>\n        <span class="left likes">', '</span>\n      </div>\n    </div>\n  <div id="modal-', '" class="modal">\n    <div class="row">\n      <div class="col s12 m8 l8">\n      <img class="modal-image" src="', '" id="', '"/>\n      </div>\n      <div class="col modal-text s12 m3 l3">\n      <h2 class="modal-title">Picture ', '</h2>\n      <img src="', '" class="circle s4 m4 l4 avatar"/>\n      <span class="valign profile-username">', '</span>\n      <p><i class="fa fa-heart left modal-likes" aria-hidden="true" id="', '"></i><span class="likes left valign">', '</span></p>\n      </div>\n    </div>\n  </div>\n  </div>']);
 
 function _taggedTemplateLiteral(strings, raw) {
   return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
@@ -464,7 +477,7 @@ var translate = require('../translate');
 
 module.exports = function userPageTemplate(user) {
   var el = yo(_templateObject, user.avatar, user.username, user.pictures.map(function (picture) {
-    return yo(_templateObject2, picture.id, picture.src, picture.id, picture.id, picture.likes, picture.id, picture.src, picture.id, picture.id, user.avatar, user.username, picture.id, picture.likes);
+    return yo(_templateObject2, user.username, picture.id, picture.src, picture.id, picture.id, picture.likes, picture.id, picture.src, picture.id, picture.id, user.avatar, user.username, picture.id, picture.likes);
   }));
 
   return layout(el);
