@@ -242,6 +242,25 @@ $avatar-size: 48px;
   }
 }
 
+.like-heart {
+  color: white;
+  font-size: 10em;
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  transform: translate(-50, -50);
+  transition: all .1s ease;
+  opacity: 0;
+
+  &.liked {
+    display: block;
+    font-size: 10em;
+    transition: all .5s ease;
+    opacity: 1;
+
+  }
+}
+
 .loader {
   font-size: 10px;
   margin: 50px auto;
