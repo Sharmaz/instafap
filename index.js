@@ -11,6 +11,9 @@ var bodyParser = require('body-parser')
 var expressSession = require('express-session')
 var passport = require('passport')
 var config = require('./config')
+var instafap = require('instafap-client')
+
+var client = instafap.createClient(config.client)
 
 var s3 = new aws.S3({
   accessKeyId: config.aws.accessKey,
@@ -66,6 +69,15 @@ app.get('/', function(req, res) {
 
 app.get('/signup', function(req, res) {
   res.render('index', { title: 'InstaFap - SignUp' })
+})
+
+app.post('/signup', function(req, res) {
+  var user = req.body
+  client.saveUser(user, function(err, usr) {
+    if (err) return res.status(500).send(err.message)
+
+    res.redirect('/signin')
+  })
 })
 
 app.get('/signin', function(req, res) {
