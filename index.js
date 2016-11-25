@@ -12,6 +12,7 @@ var expressSession = require('express-session')
 var passport = require('passport')
 var config = require('./config')
 var instafap = require('instafap-client')
+var auth = require('./auth')
 
 var client = instafap.createClient(config.client)
 
@@ -55,13 +56,17 @@ app.use(cookieParser())
 app.use(expressSession({
   secret: config.secret,
   resave: false,
-  saveUnitialized: false
+  saveUninitialized: false
 }))
 app.use(passport.initialize())
 app.use(passport.session())
 app.set('view engine', 'pug')
 
 app.use(express.static('public'))
+
+passport.use(auth.localStrategy)
+passport.deserializeUser(auth.deserializeUser)
+passport.serializeUser(auth.serializeUser)
 
 app.get('/', function(req, res) {
   res.render('index', { title: 'InstaFap' })
@@ -83,6 +88,19 @@ app.post('/signup', function(req, res) {
 app.get('/signin', function(req, res) {
   res.render('index', { title: 'InstaFap - SignIn' })
 })
+
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/signin'
+}))
+
+function ensureAuth (req, res, next) {
+  if (req.isAuthenticated()) {
+    return next()
+  }
+
+  res.status(401).send({ error: 'not authenticated' })
+}
 
 app.get('/api/pictures', function(req, res, next) {
   setTimeout(function() {
@@ -123,7 +141,7 @@ var pictures = [
   }
 ]
 
-app.post('/api/pictures', function(req, res) {
+app.post('/api/pictures', ensureAuth, function(req, res) {
   upload(req, res, function(err) {
     if (err) {
       return res.send(500, "Error Uploading File")
