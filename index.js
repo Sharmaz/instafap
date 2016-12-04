@@ -1,7 +1,7 @@
 'use strict'
 
 const express = require('express')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5050
 var multer = require('multer')
 var ext = require('file-extension')
 var aws = require('aws-sdk')
@@ -46,8 +46,6 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage }).single('picture')
 
-var server
-
 const app = express()
 
 app.set(bodyParser.json())
@@ -65,6 +63,7 @@ app.set('view engine', 'pug')
 app.use(express.static('public'))
 
 passport.use(auth.localStrategy)
+passport.use(auth.facebookStrategy)
 passport.deserializeUser(auth.deserializeUser)
 passport.serializeUser(auth.serializeUser)
 
@@ -92,6 +91,13 @@ app.get('/signin', function(req, res) {
 app.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/signin'
+}))
+
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }))
+
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  successRedirect: '/',
+  failureRedirect: 'signin'
 }))
 
 function ensureAuth (req, res, next) {
@@ -205,8 +211,8 @@ app.get('/:username/:id', function(req, res, next) {
 
 })
 
-server = app.listen(port, function (err) {
+app.listen(port, function (err) {
   if (err) return console.log('Error'), process.exit(1)
 
-  console.log('InstaFap Listen in PORT 3000')
+  console.log(`InstaFap Listen in PORT ${port}`)
 })
