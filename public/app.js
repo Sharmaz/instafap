@@ -511,8 +511,8 @@ var layout = require('../layout');
 var translate = require('../translate');
 
 module.exports = function userPageTemplate(user) {
-  var el = yo(_templateObject, user.avatar, user.username, user.pictures.map(function (picture) {
-    return yo(_templateObject2, user.username, picture.id, picture.src, picture.id, picture.id, picture.likes, picture.id, picture.src, picture.id, picture.id, user.avatar, user.username, picture.id, picture.likes);
+  var el = yo(_templateObject, user.avatar, user.name, user.pictures.map(function (picture) {
+    return yo(_templateObject2, user.username, picture.id, picture.src, picture.id, picture.id, picture.likes || 0, picture.id, picture.src, picture.id, picture.id, user.avatar, user.name, picture.id, picture.likes || 0);
   }));
 
   return layout(el);
