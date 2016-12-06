@@ -122,50 +122,36 @@ app.get('/whoami', function (req, res) {
 })
 
 app.get('/api/pictures', function(req, res, next) {
-  setTimeout(function() {
-    res.send(pictures)
-  },500)
-})
+  client.listPictures(function (err, pictures) {
+    if (err) return res.send([])
 
-var pictures = [ 
-  {
-    user:{
-      username: 'sharmaz',
-      avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
-    },
-    url: 'office.jpg',
-    likes: 0,
-    liked: false,
-    createdAt: new Date().getTime()
-  },
-  {
-    user:{
-      username: 'sharmaz',
-      avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
-    },
-    url: 'office.jpg',
-    likes: 1,
-    liked: true,
-    createdAt: new Date().setDate(new Date().getDate() - 10)
-  },
-  {
-    user:{
-      username: 'sharmaz',
-      avatar: 'https://avatars3.githubusercontent.com/u/2711641?v=3&s=460'
-    },
-    url: 'office.jpg',
-    likes: 1,
-    liked: true,
-    createdAt: new Date().setDate(new Date().getDate() - 12)
-  }
-]
+    res.send(pictures)
+  })
+})
 
 app.post('/api/pictures', ensureAuth, function(req, res) {
   upload(req, res, function(err) {
     if (err) {
-      return res.send(500, "Error Uploading File")
+      return res.status(500).send(`Error Uploading File: ${err.message}`)
     }
-    res.send('File uploaded')
+
+    var user = req.user
+    var token = req.user.token
+    var username = req.user.username
+    var src = req.file.location
+
+    client.savePicture({
+      src: src,
+      userId: username,
+      user: {
+        username: username,
+        avatar: user.avatar,
+        name: user.name
+      }
+    }, token, function (err, img) {
+      if (err) return res.status(500).send(err.message)
+      res.send(`File uploaded: ${req.file.location}`)
+    })
   })
 })
 
