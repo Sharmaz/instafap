@@ -4,16 +4,17 @@ var template = require('./template')
 var title = require('title')
 var request = require('superagent')
 var header = require('../header')
+var utils = require('../utils')
 require('babel-polyfill')
 
-page('/:username', header, loadUser, function (ctx, next) {
+page('/:username', loadUser, utils.loadAuth, header, function (ctx, next) {
   title(`InstaFap - ${ctx.params.username}`)
   var main = document.getElementById('main-container')
 
   empty(main).appendChild(template(ctx.user))
 })
 
-page('/:username/:id', header, loadUser, function (ctx, next) {
+page('/:username/:id', loadUser, utils.loadAuth,  header, function (ctx, next) {
   title(`InstaFap - ${ctx.params.username}`)
   var main = document.getElementById('main-container')
   

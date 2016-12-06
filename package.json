@@ -24,6 +24,7 @@
   "homepage": "https://github.com/Sharmaz/instafap#readme",
   "dependencies": {
     "aws-sdk": "^2.7.0",
+    "axios": "^0.15.3",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "empty-element": "^1.0.0",

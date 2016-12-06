@@ -5,7 +5,7 @@ module.exports = {
   'spanish': 'Español',
   'signup.subheading': 'Regístrate para ver fotos de tus amigos',
   'signup.facebook': 'Iniciar sesión con Facebook',
-  'signup.text': 'Iniciar Session',
+  'signup.text': 'Iniciar Sesión',
   'email': 'Correo electrónico',
   'username': 'Nombre de usuario',
   'fullname': 'Nombre Completo',

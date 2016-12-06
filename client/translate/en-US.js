@@ -20,5 +20,4 @@ module.exports = {
   'language': 'Language',
   'upload-picture': 'Upload Picture',
   'upload': 'Upload'
-
 }

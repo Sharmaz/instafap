@@ -4,7 +4,7 @@ var template = require('./template')
 var title = require('title')
 var header = require('../header')
 
-page('/signup', header, function (ctx, next) {
+page('/signup', function (ctx, next) {
   title('InstaFap - SignUp')
   var main = document.getElementById('main-container')    
   empty(main).appendChild(template)

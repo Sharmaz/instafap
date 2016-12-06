@@ -5,9 +5,11 @@ var title = require('title')
 var request = require('superagent')
 var header = require('../header')
 var Webcam = require('webcamjs')
+var axios = require('axios')
 var picture = require('../picture-card')
+var utils = require('../utils')
 
-page('/', header, loadPictures, function (ctx, next) {
+page('/', utils.loadAuth, header, loadPictures, function (ctx, next) {
   title('InstaFap')
   var main = document.getElementById('main-container')
   
