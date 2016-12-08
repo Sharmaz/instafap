@@ -7,7 +7,10 @@ var header = require('../header')
 var Webcam = require('webcamjs')
 var axios = require('axios')
 var picture = require('../picture-card')
+var io = require('socket.io-client')
 var utils = require('../utils')
+
+var socket = io.connect('http://localhost:5151')
 
 page('/', utils.loadAuth, header, loadPictures, function (ctx, next) {
   title('InstaFap')
@@ -70,6 +73,13 @@ page('/', utils.loadAuth, header, loadPictures, function (ctx, next) {
       reset()
     }
   })
+})
+
+socket.on('image', function (image) {
+  var picturesEl = document.getElementById('pictures-container')
+  var first = picturesEl.firstChild
+  var img = picture(image)
+  picturesEl.insertBefore(img, first)
 })
 
 function loadPictures(ctx, next) {
